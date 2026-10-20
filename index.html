@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Girlfriend? 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #ff9ecb, #f8b4d9, #ffe4ef);
+    background-size: 300% 300%;
+    animation: gradient 10s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #a12b62;
+}
+
+@keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 440px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 38px 25px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.72);
+    border: 2px solid rgba(255,255,255,0.85);
+    border-radius: 30px;
+    box-shadow: 0 15px 50px rgba(190, 54, 113, 0.2);
+    backdrop-filter: blur(12px);
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px) scale(.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.heart-icon {
+    font-size: 65px;
+    display: inline-block;
+    animation: heartbeat 1.3s infinite;
+    filter: drop-shadow(0 5px 8px #f58bb7);
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.18); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.12); }
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(37px, 10vw, 48px);
+    line-height: 1.2;
+    margin: 15px 0;
+    color: #d63384;
+}
+
+.subtitle {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #99506f;
+    margin-bottom: 22px;
+}
+
+.love-note {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+    color: #d63384;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    min-height: 60px;
+    margin: 12px 0 22px;
+}
+
+button {
+    border: none;
+    border-radius: 50px;
+    padding: 13px 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: transform .25s, box-shadow .25s;
+}
+
+#yesBtn {
+    color: white;
+    background: linear-gradient(135deg, #ff4f9a, #e91e63);
+    box-shadow: 0 7px 20px rgba(233, 30, 99, .3);
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(233, 30, 99, .4);
+}
+
+#noBtn {
+    color: #c64d7c;
+    background: white;
+    border: 1px solid #ffc0d9;
+    position: relative;
+    z-index: 5;
+}
+
+.footer {
+    font-size: 11px;
+    color: #bd7092;
+    letter-spacing: 1px;
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -50px;
+    pointer-events: none;
+    z-index: 1;
+    animation: floatUp linear forwards;
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(.6);
+        opacity: 0;
+    }
+    15% { opacity: .8; }
+    80% { opacity: .7; }
+    100% {
+        transform: translateY(-115vh) rotate(35deg) scale(1.3);
+        opacity: 0;
+    }
+}
+
+.sparkle {
+    position: absolute;
+    color: #ff69a6;
+    animation: twinkle 2s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from { opacity: .3; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1.2); }
+}
+
+#success {
+    display: none;
+}
+
+#success h1 {
+    font-size: clamp(38px, 10vw, 52px);
+}
+
+.love-message {
+    line-height: 2;
+    font-size: 14px;
+    margin: 18px 0;
+    color: #99506f;
+}
+
+.big-heart {
+    font-size: 85px;
+    animation: heartbeat 1.2s infinite;
+}
+
+#againBtn {
+    margin-top: 10px;
+    background: white;
+    color: #d63384;
+    border: 1px solid #ffc0d9;
+}
+
+.music-status {
+    margin-top: 15px;
+    color: #bd7092;
+    font-size: 12px;
+}
+
+.music-controls {
+    display: none;
+    margin-top: 12px;
+}
+
+#musicBtn {
+    padding: 10px 18px;
+    font-size: 13px;
+    color: #d63384;
+    background: white;
+    border: 1px solid #ffc0d9;
+}
+
+@media (max-width: 380px) {
+    .card { padding: 30px 17px; }
+    .buttons { gap: 10px; }
+    button { padding: 12px 23px; }
+}
+</style>
+</head>
+
+<body>
+
+<!--
+PENTING:
+Taruh file lagu bernama lagu.mp3
+di folder yang sama dengan index.html.
+-->
+
+<audio id="loveSong" loop preload="auto">
+    <source src="Bryan Adams - Heaven (Official Music Video).mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+
+    <section id="question">
+        <div class="heart-icon">💗</div>
+
+        <h1>Will You Be<br>My Girlfriend?</h1>
+
+        <p class="subtitle">
+            There's something special<br>
+            I've been waiting to ask you...
+        </p>
+
+        <p class="love-note">
+            Will you be my favorite person? 🌷
+        </p>
+
+        <div class="buttons">
+            <button id="yesBtn">Yes! 💖</button>
+            <button id="noBtn">No 🙈</button>
+        </div>
+
+        <p class="footer">MADE WITH LOVE, JUST FOR YOU SAYANG ♡</p>
+
+        <span class="sparkle" style="top:15px;left:20px">✦</span>
+        <span class="sparkle" style="top:70px;right:25px">✧</span>
+        <span class="sparkle" style="bottom:35px;left:30px">♡</span>
+        <span class="sparkle" style="bottom:70px;right:25px">✦</span>
+    </section>
+
+    <section id="success">
+        <div class="big-heart">💝</div>
+
+        <h1>Yaaay! I Love You! 💕</h1>
+
+        <p class="love-message">
+            You just made my world<br>
+            a little more beautiful. 🌸<br><br>
+
+            Thank you for choosing me.<br>
+            I want to make you smile,<br>
+            support your dreams, and create<br>
+            beautiful memories with you.<br><br>
+
+            <strong>Today, tomorrow, and every day,</strong><br>
+            I'll be grateful to have you. 💗
+        </p>
+
+        <p class="love-note">
+            You + Me = Something Beautiful ♡
+        </p>
+
+        <div class="music-controls" id="musicControls">
+            <button id="musicBtn">⏸ Pause Music</button>
+        </div>
+
+        <p class="music-status" id="musicStatus">
+            🎵 A little song, just for you...
+        </p>
+
+        <button id="againBtn">Read Again 💌</button>
+    </section>
+
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const question = document.getElementById("question");
+const success = document.getElementById("success");
+const againBtn = document.getElementById("againBtn");
+const loveSong = document.getElementById("loveSong");
+const musicBtn = document.getElementById("musicBtn");
+const musicStatus = document.getElementById("musicStatus");
+const musicControls = document.getElementById("musicControls");
+
+let accepted = false;
+
+// TOMBOL NO SELALU MENGHINDAR 🙈
+function runAway() {
+    if (accepted) return;
+
+    const x = Math.random() * 180 - 90;
+    const y = Math.random() * 100 - 50;
+
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+noBtn.addEventListener("pointerenter", runAway);
+
+noBtn.addEventListener("pointerdown", function(event) {
+    event.preventDefault();
+    runAway();
+});
+
+noBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    runAway();
+});
+
+// SAAT YES DIPENCET 💖
+yesBtn.addEventListener("click", async function() {
+    if (accepted) return;
+    accepted = true;
+
+    question.style.display = "none";
+    success.style.display = "block";
+    musicControls.style.display = "block";
+
+    // Atur detik mulai lagu di sini 🎵
+loveSong.currentTime = 46; // Mulai dari detik ke-45
+
+try {
+    await loveSong.play();
+        musicStatus.textContent = "🎶 Now playing, just for you 💗";
+        musicBtn.textContent = "⏸ Pause Music";
+    } catch (error) {
+        musicStatus.textContent =
+            "🎵 Tap play below if the music doesn't start.";
+        musicBtn.textContent = "▶ Play Music";
+    }
+
+    // Hujan hati romantis
+    for (let i = 0; i < 45; i++) {
+        setTimeout(createHeart, i * 90);
+    }
+});
+
+// Tombol untuk play / pause musik
+musicBtn.addEventListener("click", async function() {
+    if (loveSong.paused) {
+        try {
+            await loveSong.play();
+            musicStatus.textContent = "🎶 Now playing, just for you 💗";
+            musicBtn.textContent = "⏸ Pause Music";
+        } catch (error) {
+            musicStatus.textContent =
+                "Sorry, the song could not be played.";
+        }
+    } else {
+        loveSong.pause();
+        musicBtn.textContent = "▶ Play Music";
+        musicStatus.textContent = "Music paused 💕";
+    }
+});
+
+// Hati beterbangan
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+
+    const hearts = ["💗", "💕", "💖", "💘", "💓", "🌸", "✨"];
+    heart.textContent =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (18 + Math.random() * 24) + "px";
+    heart.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 9000);
+}
+
+setInterval(createHeart, 450);
+
+// Tombol kembali ke halaman awal
+// Musik tetap berjalan sampai dihentikan atau halaman ditutup.
+againBtn.addEventListener("click", function() {
+    success.style.display = "none";
+    question.style.display = "block";
+    noBtn.style.transform = "translate(0, 0)";
+    accepted = false;
+});
+</script>
+
+</body>
+</html>
